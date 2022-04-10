@@ -8,6 +8,20 @@ const routes = [
     ]
   },
   {
+    path: '/demo',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/LocalGroceryStore.vue') }
+    ]
+  },
+  {
+    path: '/categories/:category',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Category.vue') }
+    ]
+  },
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
