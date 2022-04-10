@@ -3,7 +3,7 @@
    <q-banner class="bg-primary text-white">
             Powered by https://world.openfoodfacts.org/ and https://.openfoodfacts.org
           <template v-slot:action>
-            <q-btn>Cart <q-badge color="orange" floating>{{cart.length}}</q-badge></q-btn>
+            <q-btn @click="goToCheckout()">Cart <q-badge color="orange" floating>{{cart.length}}</q-badge></q-btn>
           </template>
         </q-banner>
 
@@ -49,13 +49,9 @@ export default {
   computed: {
       cart() {
           const component = this
-          const newCartItem = this.newCartItem
           try {
             const cart = localStorage.getItem("cart")
             const cartItems = JSON.parse(cart)
-            if(newCartItem) {
-                if(cartItems.find(function(item){ return item.name == newCartItem.name}) == undefined)  cartItems.push(newCartItem)
-            }
             component.newCartItem = null
             return cartItems || []
           } catch(e) {
@@ -71,18 +67,25 @@ export default {
   },
   methods: {
       async goToproduct(product) {
-          this.$router.push(`/products/${product.id}`)
+          this.$router.replace(`/products/${product.id}`)
          // this.$router
       },
       async addToCart(product) {
+          const component = this
           const cart = this.cart
           console.log("cart", cart)
-          const basicProduct = {name: product.product_name}
+          const basicProduct = {name: product.product_name, imageUrl: product.image_front_small_url}
           cart.push(basicProduct)
           this.newCartItem = basicProduct
           console.log("this is the cart now", cart)
-          if(cart.find(function(item){ return item.name == this.newCartItem.name}) == undefined) localStorage.setItem("cart", JSON.stringify(cart))
+          localStorage.setItem("cart", JSON.stringify(cart))
+         // if(cart.find(function(item){ return item.name == component.newCartItem.name}) == undefined) localStorage.setItem("cart", JSON.stringify(cart))
         
+      },
+      async goToCheckout() {
+
+          this.$router.replace(`/checkout`)
+         // this.$router
       }
   }
 };

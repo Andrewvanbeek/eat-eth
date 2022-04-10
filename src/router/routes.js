@@ -15,6 +15,13 @@ const routes = [
     ]
   },
   {
+    path: '/checkout',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Checkout.vue') }
+    ]
+  },
+  {
     path: '/categories/:category',
     component: () => import('layouts/MainLayout.vue'),
     children: [

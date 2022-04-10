@@ -1,10 +1,9 @@
 <template>
   <div>
           <q-banner class="bg-primary text-white">
-          Start Capture
+  Choose Food Section(will allow Scanning of qr code in future)
           <template v-slot:action>
               Powered by https://world.openfoodfacts.org/ and https://.openfoodfacts.org
-            <q-btn >Take Picture</q-btn>
           </template>
         </q-banner>
 
@@ -49,7 +48,7 @@ export default {
   },
   methods: {
       async goToCategory(category) {
-          this.$router.push(`/categories/${category.id}`)
+         this.$router.replace(`/categories/${category.id}`)
          // this.$router
       }
   }
