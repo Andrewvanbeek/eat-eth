@@ -8,6 +8,11 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js
 
+console.log("JOFIDHHFDUISHIFHIUSFHDIUHFDIUSH")
+const envparser = require('./envparser.js')
+
+
+
 
 const { configure } = require('quasar/wrappers');
 
@@ -45,10 +50,11 @@ module.exports = configure(function (ctx) {
       'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
     ],
-
+    dev: true,
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      env: require('dotenv').config().parsed,
 
       // transpile: false,
       // publicPath: '/',
